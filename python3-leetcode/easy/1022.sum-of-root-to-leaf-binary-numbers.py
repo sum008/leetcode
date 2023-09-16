@@ -12,7 +12,20 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def sumRootToLeaf(self, root: Optional[TreeNode]) -> int:
-        
-# @lc code=end
+    def form_binary(self, node, cur_binary, res):
+        final_binary = cur_binary + str(node.val)
+        if node.left != None:
+            res = self.form_binary(node.left, final_binary, res)
+        if node.right != None:
+            res = self.form_binary(node.right, final_binary, res)
 
+        if node.left == None and node.right == None:
+            return res + int(final_binary, 2)
+        return res
+
+    def sumRootToLeaf(self, root: Optional[TreeNode]) -> int:
+        node = root
+        return self.form_binary(node, "", 0)
+
+
+# @lc code=end
