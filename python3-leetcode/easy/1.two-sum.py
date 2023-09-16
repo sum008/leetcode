@@ -7,6 +7,17 @@
 # @lc code=start
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        
-# @lc code=end
+        num_dict = {}
+        res = []
+        for index, ele in enumerate(nums):
+            num_dict[ele] = index
 
+        for index, ele in enumerate(nums):
+            if target-ele in num_dict and index != num_dict[target-ele]:
+                res.append(index)
+                res.append(num_dict[target-ele])
+                break
+
+        return res
+
+# @lc code=end
