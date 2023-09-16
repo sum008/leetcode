@@ -17,8 +17,7 @@ class Solution:
             self.all_paranthesis(left_brace, right_brace +
                                  1, ")", final_str, n, res)
         if left_brace+right_brace == n*2:
-            if final_str[2*n-1] != "(":
-                res.append(final_str)
+            res.append(final_str)
             return
 
     def generateParenthesis(self, n: int) -> List[str]:
