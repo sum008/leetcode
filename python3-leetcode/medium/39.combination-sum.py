@@ -7,22 +7,19 @@
 # @lc code=start
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        def find_all_combination(cur_list, res):
+        def find_all_combination(cur_list, res, start):
             if sum(cur_list) > target:
-                # print(cur_list, "yoooo")
                 return
             if sum(cur_list) == target:
                 res.append(cur_list.copy())
-                print(cur_list)
                 return
-            start = 0
             while start < len(candidates):
                 cur_list.append(candidates[start])
-                find_all_combination(cur_list, res)
+                find_all_combination(cur_list, res, start)
                 cur_list.pop()
                 start += 1
         res = []
-        find_all_combination([], res)
+        find_all_combination([], res, 0)
         return res
 
 # @lc code=end
