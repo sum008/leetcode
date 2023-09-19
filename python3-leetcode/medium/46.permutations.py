@@ -11,7 +11,7 @@ import math
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         def get_all_permutations(fixed, remaining, cur_res):
-            if len(fixed) == n:
+            if len(remaining) == 0:
                 result.append(fixed.copy())
                 return
             start = 0
