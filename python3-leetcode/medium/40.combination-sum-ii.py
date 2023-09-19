@@ -5,6 +5,8 @@
 #
 
 # @lc code=start
+
+# Trying to optimize it
 class Solution:
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
         def find_all_combination(cur_list, res, start, cur_str, cur_sum):
