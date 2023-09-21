@@ -23,9 +23,9 @@ class Solution:
                     row += 1
 
             else:
-                if board[row][column] != word[cur_word_index] or tuple([row, column]) in index_set:
+                if board[row][column] != word[cur_word_index]:
                     return
-                index_set[tuple([row, column])] = 1
+                board[row][column] = '1'
                 search_word(row-1, column, n_row, n_col,
                             cur_word_index+1, cur_word+word[cur_word_index], "")
                 search_word(row+1, column, n_row, n_col,
@@ -34,7 +34,7 @@ class Solution:
                             cur_word_index+1, cur_word+word[cur_word_index], "")
                 search_word(row, column-1, n_row, n_col,
                             cur_word_index+1, cur_word+word[cur_word_index], "")
-                index_set.popitem()
+                board[row][column] = word[cur_word_index]
                 if cur_word+word[cur_word_index] == word:
                     res.append(1)
                     return
@@ -42,7 +42,6 @@ class Solution:
         col = len(board[0])
         row = len(board)
         res = []
-        index_set = {}
         if row*col < len(word):
             return False
         search_word(0, 0, row, col, 0, "", "i")
