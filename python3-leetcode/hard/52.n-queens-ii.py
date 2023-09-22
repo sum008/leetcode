@@ -9,8 +9,11 @@ class Solution:
     def totalNQueens(self, n: int) -> int:
         def driver(config):
             for i in range(0, n):
-                find_valid_boards(
+                x = find_valid_boards(
                     0, i, 0, config)
+                if x:
+                    return True
+            return False
 
         def valid(row, column, conf):
             for r, c in conf:
@@ -18,28 +21,45 @@ class Solution:
                     return False
             return True
 
-        # def check_prev_pos(cur_row, cur_col, prev_row, prev_col):
-        #     if cur_col == prev_col or (cur_row-1 == prev_row and cur_col-1 == prev_col) or (cur_row-1 == prev_row and cur_col+1 == prev_col):
-        #         return False
-        #     return True
+        def mirror_found(cur_res, prev_res):
+            index = 0
+            k = n-1
+            for i, j in cur_res:
+                if k-j != prev_res[index][1]:
+                    return False
+                index += 1
+            return True
 
         def find_valid_boards(row, column, queen_count, conf):
             if row >= n or column >= n or row < 0 or column < 0:
-                return
+                return False
             # check if valid position
             if not valid(row, column, conf):
-                return
+                return False
             # found valid position
             conf.append([row, column])
             # found one valid configuration
             if queen_count == n-1:
-                res.append(1)
+                # print(conf)
+                if len(res) > 0:
+                    if not mirror_found(conf, res[0]):
+                        counter[0] = counter[0]+1
+                        res[0] = conf.copy()
+
+                    else:
+                        return True
+                else:
+                    counter.append(1)
+                    res.append(conf.copy())
             for col in range(0, n):
                 # check if upcoming position is valid or not, if not then continue
                 if col == column or col-1 == column or col+1 == column:
                     continue
-                find_valid_boards(row+1, col, queen_count+1, conf)
+                x = find_valid_boards(row+1, col, queen_count+1, conf)
+                if x:
+                    return True
             conf.pop()
+            return False
 
         res = []
         if n == 2 or n == 3:
@@ -47,7 +67,8 @@ class Solution:
         if n == 1:
             return 1
         valid_config = []
+        counter = []
         driver(valid_config)
-        return len(res)
+        return counter[0]*2
 
 # @lc code=end
