@@ -12,7 +12,6 @@ class Solution:
                 x = find_valid_boards(
                     0, i, 0, ["."*i + "Q" + "."*(n-(i+1))], ["."*((n-1)-i) + "Q" + "."*(n-(((n-1)-i)+1))], config)
                 if x:
-                    res.extend(mirror_config_store)
                     return True
 
         def valid(row, column, conf):
@@ -42,12 +41,12 @@ class Solution:
             if queen_count == n-1:
                 if len(res) == 0:
                     res.append(cur_config)
-                    mirror_config_store.append(mirror_config)
+                    res.append(mirror_config)
                     temp_config.append(conf.copy())
                 else:
                     if not mirror_found(conf, temp_config[0]):
                         res.append(cur_config)
-                        mirror_config_store.append(mirror_config)
+                        res.append(mirror_config)
                         temp_config[0] = conf.copy()
                     else:
                         return True
@@ -73,10 +72,8 @@ class Solution:
         if n == 1:
             return [["Q"]]
         valid_config = []
-        mirror_config_store = []
         temp_config = []
         driver(valid_config)
-        # print(config_store)
         return res
 
 
