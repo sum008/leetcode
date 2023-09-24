@@ -7,13 +7,17 @@
 # @lc code=start
 class Solution:
     def climbStairs(self, n: int) -> int:
-        def calc_steps(cur_sum, n):
-            if cur_sum == n:
+        def calc_steps(n):
+            if n == 1:
                 return 1
-            if cur_sum > n:
-                return 0
-            return calc_steps(cur_sum+steps[0], n) + calc_steps(cur_sum+steps[1], n)
-        steps = [1, 2]
-        return calc_steps(0, n)
+            if n == 2:
+                return 2
+            if n in d:
+                return d[n]
+            k = calc_steps(n-1) + calc_steps(n-2)
+            d[n] = k
+            return k
+        d = {}
+        return calc_steps(n)
 
 # @lc code=end
