@@ -1,0 +1,12 @@
+#
+# @lc app=leetcode id=2550 lang=python3
+#
+# [2550] Count Collisions of Monkeys on a Polygon
+#
+
+# @lc code=start
+class Solution:
+    def monkeyMove(self, n: int) -> int:
+        return (pow(2, n, 1000000007) - 2) % 1000000007
+
+# @lc code=end
