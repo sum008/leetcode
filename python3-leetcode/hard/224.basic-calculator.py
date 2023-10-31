@@ -31,21 +31,17 @@ class Solution:
                             res -= r
                         opt = ""
                     else:
-                        found = False
+                        num=0
                         for j in range(0, len(cur_exp[i+1:])):
                             if cur_exp[i+1:][j] in ("+", "-"):
-                                found = True
                                 break
-                        if not found:
-                            if opt in ("+", ""):
-                                res += int(cur_exp[i+1:])
                             else:
-                                res -= int(cur_exp[i+1:])
+                                num*=10
+                                num += int(cur_exp[i+1:][j])
+                        if opt in ("", "+"):
+                            res += num
                         else:
-                            if opt in ("+", ""):
-                                res += int(cur_exp[i+1:i+j+1])
-                            else:
-                                res -= int(cur_exp[i+1:i+j+1])
+                            res -= num
                         i += j+1
                         opt = cur_exp[i]
                 elif cur_exp[i] == "(":
@@ -66,21 +62,17 @@ class Solution:
                         res -= r
                     opt = ""
                 else:
-                    found = False
+                    num=0
                     for j in range(0, len(cur_exp[i:])):
                         if cur_exp[i:][j] in ("+", "-"):
-                            found = True
                             break
-                    if not found:
-                        if opt in ("", "+"):
-                            res += int(cur_exp[i:])
                         else:
-                            res -= int(cur_exp[i:])
+                            num*=10
+                            num += int(cur_exp[i:][j])
+                    if opt in ("", "+"):
+                        res += num
                     else:
-                        if opt in ("", "+"):
-                            res += int(cur_exp[i:i+j])
-                        else:
-                            res -= int(cur_exp[i:i+j])
+                        res -= num
                     i += j
                     opt = cur_exp[i]
 
